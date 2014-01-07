@@ -1,6 +1,6 @@
 # generator-smarttv [![Build Status](https://secure.travis-ci.org/eddiemoore/generator-smarttv.png?branch=master)](https://travis-ci.org/eddiemoore/generator-smarttv)
 
-A generator for [Yeoman](http://yeoman.io) to scaffold a Samsun SmartTV application.
+A generator for [Yeoman](http://yeoman.io) to scaffold a Samsung SmartTV application.
 
 
 ## Getting Started
@@ -10,6 +10,8 @@ A generator for [Yeoman](http://yeoman.io) to scaffold a Samsun SmartTV applicat
 - Run: `yo smarttv`
 - Follow the prompts
 - Run: `grunt server`
+
+See the [documentation on Samsung SmartTV apps](http://www.samsungdforum.com/guide/) for help with creating applications.
 
 ## Todo
 - Create icons
