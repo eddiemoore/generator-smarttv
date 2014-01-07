@@ -62,7 +62,12 @@
         </div>
         <% } %>
 
-        
+        <script>
+            var widgetAPI = new Common.API.Widget();
+            $(function() {
+                widgetAPI.sendReadyEvent();
+            });
+        </script>
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>
