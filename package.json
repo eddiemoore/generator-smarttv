@@ -1,0 +1,45 @@
+{
+  "name": "generator-smarttv",
+  "version": "0.0.1",
+  "description": "Scaffold out a Samsung SmartTV app",
+  "keywords": [
+    "yeoman-generator",
+    "samsung",
+    "smarttv",
+    "smart",
+    "tv"
+  ],
+  "homepage": "https://github.com/eddiemoore/generator-smarttv",
+  "bugs": "https://github.com/eddiemoore/generator-smarttv/issues",
+  "author": {
+    "name": "Ed Moore",
+    "email": "eddie.moore@gmail.com",
+    "url": "https://github.com/eddiemoore"
+  },
+  "main": "app/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/eddiemoore/generator-smarttv.git"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "dependencies": {
+    "yeoman-generator": "~0.14.0"
+  },
+  "devDependencies": {
+    "mocha": "~1.14.0"
+  },
+  "peerDependencies": {
+    "yo": ">=1.0.0"
+  },
+  "engines": {
+    "node": ">=0.8.0",
+    "npm": ">=1.2.10"
+  },
+  "licenses": [
+    {
+      "type": "MIT"
+    }
+  ]
+}

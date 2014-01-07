@@ -1,0 +1,31 @@
+<?xml version="1.0"encoding="UTF-8"?>
+<widget>
+    <ThumbIcon>images/icons/yeoman_106.png</ThumbIcon>
+    <BigThumbIcon>images/icons/yeoman_115.png</BigThumbIcon>
+    <ListIcon>images/icons/yeoman_85.png</ListIcon>
+    <BigListIcon>images/icons/yeoman_95.png</BigListIcon>
+    <category></category>
+    <autoUpdate>n</autoUpdate>
+    <cpname></cpname>
+    <cpauthjs></cpauthjs>
+    <ver>0.1</ver>
+    <mgrver>1.000</mgrver>
+    <fullwidget>y</fullwidget>
+    <srcctl>y</srcctl>
+    <ticker>n</ticker>
+    <childlock>n</childlock>
+    <audiomute>n</audiomute>
+    <videomute>n</videomute>
+    <dcont>y</dcont>
+    <network>y</network>
+    <widgetname><%= appname %></widgetname>
+    <description>Welcome!</description>
+    <width>960</width>
+    <height>540</height>
+    <author>
+        <name></name>
+        <email></email>
+        <link></link>
+        <organization></organization>
+    </author>
+</widget>
