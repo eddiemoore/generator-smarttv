@@ -91,6 +91,10 @@ SmartTVGenerator.prototype.jshint = function jshint() {
   this.copy('jshintrc', '.jshintrc');
 };
 
+SmartTVGenerator.prototype.configXML = function jshint() {
+  this.template('config.xml', 'config.xml');
+};
+
 SmartTVGenerator.prototype.editorConfig = function editorConfig() {
   this.copy('editorconfig', '.editorconfig');
 };
