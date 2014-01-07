@@ -136,7 +136,7 @@ SmartTVGenerator.prototype.writeIndex = function writeIndex() {
 };
 
 SmartTVGenerator.prototype.writeConfigXML = function jshint() {
-  this.template('config.xml', 'config.xml');
+  this.copy('config.xml', 'config.xml');
 };
 
 SmartTVGenerator.prototype.app = function app() {
