@@ -25,6 +25,7 @@
     "grunt-newer": "~0.6.0",
     "grunt-svgmin": "~0.2.0",
     "grunt-concurrent": "~0.4.0",
+    "grunt-exec": "~0.4.3",
     "load-grunt-tasks": "~0.2.0",
     "time-grunt": "~0.2.0",
     "jshint-stylish": "~0.1.3"

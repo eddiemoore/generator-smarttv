@@ -374,6 +374,11 @@ module.exports = function (grunt) {
                 'imagemin',
                 'svgmin'
             ]
+        },
+        exec: {
+            virtual_box: {
+                command: 'VBoxManage startvm "2014_Smart_TV_Emulator_5_0" &'
+            }
         }
     });
 
@@ -386,6 +391,7 @@ module.exports = function (grunt) {
         grunt.task.run([
             'clean:server',
             'concurrent:server',
+            'exec:virtual_box',
             'autoprefixer',
             'connect:livereload',
             'watch'
