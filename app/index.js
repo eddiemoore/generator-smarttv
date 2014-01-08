@@ -104,7 +104,7 @@ SmartTVGenerator.prototype.mainStylesheet = function mainStylesheet() {
 
 SmartTVGenerator.prototype.mainJavaScript = function mainJavaScript() {
   var js = 'scripts/main.' + (this.coffee ? 'coffee' : 'js');
-  this.copy(js, 'app/scripts/' + js);
+  this.copy(js, 'app/' + js);
 };
 
 SmartTVGenerator.prototype.writeIndex = function writeIndex() {
