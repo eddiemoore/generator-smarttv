@@ -1,28 +1,30 @@
-<!doctype html>
+<!DOCTYPE html>
 <html class="no-js">
     <head>
-        <meta charset="utf-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <title><%= appname %></title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width">
+
+        <!-- TODO : Common API -->
+        <script type="text/javascript" language="javascript" src="$MANAGER_WIDGET/Common/API/Widget.js"></script>
+        <script type="text/javascript" language="javascript" src="$MANAGER_WIDGET/Common/API/TVKeyValue.js"></script>
+
         <!-- build:css styles/vendor.css -->
         <!-- bower:css -->
         <% if (includeBootstrap && !includeCompass) { %><link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css"><% } %>
         <!-- endbower -->
         <!-- endbuild -->
+
+        <!-- TODO : Style sheets code -->
         <!-- build:css(.tmp) styles/main.css -->
         <link rel="stylesheet" href="styles/main.css">
         <!-- endbuild -->
-        <script type="text/javascript" src= "$MANAGER_WIDGET/Common/API/Widget.js"></script>
-        <script type="text/javascript"  src="$MANAGER_WIDGET/Common/API/TVKeyValue.js"></script>
-        <script type="text/javascript" src="$MANAGER_WIDGET/Common/jquery.js"></script>
-        <!-- build:js scripts/vendor.js -->
-        <!-- bower:js -->
-        <script src="bower_components/jquery/jquery.js"></script>
-        <!-- endbower -->
-        <!-- endbuild -->
     </head>
-    <body>
+    <body onload="Main.onLoad();" onunload="Main.onUnload();">
+
+        <!-- Dummy anchor as focus for key events -->
+        <a href="javascript:void(0);" id="anchor" onkeydown="Main.keyDown();"></a>
+
+        <!-- TODO: your code here -->
 
         <% if (includeBootstrap) { %>
         <div class="container">
@@ -53,6 +55,9 @@
 
         </div>
         <% } else { %>
+        <div class="header">
+            <h3><%= appname %></h3>
+        </div>
         <div class="hero-unit">
           <h1>'Allo, 'Allo!</h1>
           <p>You now have</p>
@@ -61,13 +66,6 @@
           </ul>
         </div>
         <% } %>
-
-        <script>
-            var widgetAPI = new Common.API.Widget();
-            $(function() {
-                widgetAPI.sendReadyEvent();
-            });
-        </script>
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>

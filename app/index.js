@@ -102,6 +102,11 @@ SmartTVGenerator.prototype.mainStylesheet = function mainStylesheet() {
   this.copy(css, 'app/styles/' + css);
 };
 
+SmartTVGenerator.prototype.mainJavaScript = function mainJavaScript() {
+  var js = 'main.' + (this.coffee ? 'coffee' : 'js');
+  this.copy(js, 'app/scripts/' + js);
+};
+
 SmartTVGenerator.prototype.writeIndex = function writeIndex() {
 
   this.indexFile = this.readFileAsString(path.join(this.sourceRoot(), 'index.html'));
@@ -145,16 +150,6 @@ SmartTVGenerator.prototype.app = function app() {
   this.mkdir('app/styles');
   this.mkdir('app/images');
   this.write('app/index.html', this.indexFile);
-
-  if (this.coffee) {
-    this.write(
-      'app/scripts/main.coffee',
-      'console.log "\'Allo from CoffeeScript!"'
-    );
-  }
-  else {
-    this.write('app/scripts/main.js', 'console.log(\'\\\'Allo \\\'Allo!\');');
-  }
 };
 
 SmartTVGenerator.prototype.imageFiles = function () {

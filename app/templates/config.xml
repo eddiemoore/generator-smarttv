@@ -1,31 +1,31 @@
-<?xml version="1.0"encoding="UTF-8"?>
-<widget>
-    <ThumbIcon>images/icons/yeoman_106.png</ThumbIcon>
-    <BigThumbIcon>images/icons/yeoman_115.png</BigThumbIcon>
-    <ListIcon>images/icons/yeoman_85.png</ListIcon>
-    <BigListIcon>images/icons/yeoman_95.png</BigListIcon>
-    <category></category>
-    <autoUpdate>n</autoUpdate>
-    <cpname></cpname>
-    <cpauthjs></cpauthjs>
-    <ver>0.1</ver>
-    <mgrver>1.000</mgrver>
-    <fullwidget>y</fullwidget>
-    <srcctl>y</srcctl>
-    <ticker>n</ticker>
-    <childlock>n</childlock>
-    <audiomute>n</audiomute>
-    <videomute>n</videomute>
-    <dcont>y</dcont>
-    <network>y</network>
-    <widgetname><%= appname %></widgetname>
-    <description>Welcome!</description>
-    <width>960</width>
-    <height>540</height>
-    <author>
-        <name></name>
-        <email></email>
-        <link></link>
-        <organization></organization>
-    </author>
+<?xml version="1.0" encoding="UTF-8"?>
+<widget xmlns="http://www.samsung.com/">  
+  <cpname itemtype="string"/>  
+  <cplogo itemtype="string"/>  
+  <cpauthjs itemtype="string"/>  
+  <ThumbIcon itemtype="string">images/icons/yeoman_106.png</ThumbIcon>  
+  <BigThumbIcon itemtype="string">images/icons/yeoman_115.png</BigThumbIcon>  
+  <ListIcon itemtype="string">images/icons/yeoman_85.png</ListIcon>
+  <BigListIcon itemtype="string">images/icons/yeoman_95.png</BigListIcon>  
+  <category itemtype="string"/>  
+  <autoUpdate itemtype="boolean">n</autoUpdate>  
+  <ver itemtype="string">0.100</ver>  
+  <mgrver itemtype="string"/>  
+  <fullwidget itemtype="boolean">y</fullwidget>  
+  <type itemtype="string">user</type>  
+  <srcctl itemtype="boolean">y</srcctl>  
+  <ticker itemtype="boolean">n</ticker>  
+  <childlock itemtype="boolean">n</childlock>  
+  <videomute itemtype="boolean">n</videomute>  
+  <dcont itemtype="boolean">y</dcont>  
+  <widgetname itemtype="string"><%= appname %></widgetname>  
+  <description itemtype="string"/>  
+  <width itemtype="string">960</width>  
+  <height itemtype="string">540</height>  
+  <author itemtype="group"> 
+    <name itemtype="string"/>  
+    <email itemtype="string"/>  
+    <link itemtype="string"/>  
+    <organization itemtype="string"/> 
+  </author> 
 </widget>
