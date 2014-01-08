@@ -40,6 +40,7 @@ See the [documentation on Samsung SmartTV apps](http://www.samsungdforum.com/gui
 - Create icons
 - Include more js files for Samsung SmartTV
 - Include sample code for basic app
+- Get `grunt serve` to load app in VirtualBox
 
 ## License
 
