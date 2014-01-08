@@ -103,7 +103,7 @@ SmartTVGenerator.prototype.mainStylesheet = function mainStylesheet() {
 };
 
 SmartTVGenerator.prototype.mainJavaScript = function mainJavaScript() {
-  var js = 'main.' + (this.coffee ? 'coffee' : 'js');
+  var js = 'scripts/main.' + (this.coffee ? 'coffee' : 'js');
   this.copy(js, 'app/scripts/' + js);
 };
 
