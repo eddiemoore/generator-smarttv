@@ -22,13 +22,17 @@
     "url": "git://github.com/eddiemoore/generator-smarttv.git"
   },
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "coveralls": "istanbul cover _mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | coveralls && rm -rf ./coverage"
   },
   "dependencies": {
-    "yeoman-generator": "~0.14.0"
+    "yeoman-generator": "~0.14.0",
+    "coveralls": "~2.6.1"
   },
   "devDependencies": {
-    "mocha": "~1.14.0"
+    "mocha": "~1.14.0",
+    "coveralls": "*",
+    "istanbul": "*"
   },
   "peerDependencies": {
     "yo": ">=1.0.0"
