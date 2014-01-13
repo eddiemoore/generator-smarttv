@@ -1,4 +1,4 @@
-# generator-smarttv [![Build Status](https://secure.travis-ci.org/eddiemoore/generator-smarttv.png?branch=master)](https://travis-ci.org/eddiemoore/generator-smarttv) [![Coverage Status](https://coveralls.io/repos/eddiemoore/generator-smarttv/badge.png)](https://coveralls.io/r/eddiemoore/generator-smarttv)
+# generator-smarttv [![Build Status](https://secure.travis-ci.org/eddiemoore/generator-smarttv.png?branch=master)](https://travis-ci.org/eddiemoore/generator-smarttv) [![Coverage Status](https://coveralls.io/repos/eddiemoore/generator-smarttv/badge.png)](https://coveralls.io/r/eddiemoore/generator-smarttv) [![Dependency Status](https://gemnasium.com/eddiemoore/generator-smarttv.png)](https://gemnasium.com/eddiemoore/generator-smarttv)
 
 A generator for [Yeoman](http://yeoman.io) to scaffold a Samsung SmartTV application.
 
