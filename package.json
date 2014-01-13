@@ -26,11 +26,11 @@
     "coveralls": "istanbul cover _mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | coveralls && rm -rf ./coverage"
   },
   "dependencies": {
-    "yeoman-generator": "~0.14.0",
-    "coveralls": "~2.6.1"
+    "yeoman-generator": "~0.14.0"
   },
   "devDependencies": {
-    "mocha": "~1.14.0",
+    "mocha": "*",
+    "mocha-lcov-reporter": "*",
     "coveralls": "*",
     "istanbul": "*"
   },
