@@ -1,6 +1,6 @@
 {
   "name": "generator-smarttv",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Scaffold out a Samsung SmartTV app",
   "keywords": [
     "yeoman-generator",
