@@ -39,7 +39,8 @@
     "jshint": "*"
   },
   "peerDependencies": {
-    "yo": ">=1.0.0"
+    "yo": ">=1.0.0",
+    "generator-mocha": "~0.1.1"
   },
   "engines": {
     "node": ">=0.8.0",
