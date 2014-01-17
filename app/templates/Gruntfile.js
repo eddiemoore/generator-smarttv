@@ -389,7 +389,7 @@ module.exports = function (grunt) {
         },
         exec: {
             virtual_box: {
-                command: 'VBoxManage startvm "2014_Smart_TV_Emulator_5_0" &'
+                command: 'VBoxManage sharedfolder remove "2014_Smart_TV_Emulator_5_0" --name "Apps" && VBoxManage sharedfolder add "2014_Smart_TV_Emulator_5_0" --name "Apps" --hostpath "$(pwd)" --automount && VBoxManage startvm "2014_Smart_TV_Emulator_5_0" &'
             }
         }
     });
