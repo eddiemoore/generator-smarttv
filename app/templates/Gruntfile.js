@@ -21,16 +21,20 @@ module.exports = function (grunt) {
         // Project settings
         yeoman: {
             // Configurable paths
-            app: 'app',
+            app: 'src',
             dist: 'dist'
         },
 
         // Watches files for changes and runs tasks based on the changed files
-        watch: {<% if (coffee) { %>
+        watch: {<% if (coffee) { if (noAppFramework) { %>
             coffee: {
                 files: ['<%%= yeoman.app %>/scripts/{,*/}*.{coffee,litcoffee,coffee.md}'],
                 tasks: ['coffee:dist']
-            },
+            },<% } else { %>
+            coffee: {
+                files: ['<%%= yeoman.app %>/{,*/}*.{coffee,litcoffee,coffee.md}'],
+                tasks: ['coffee:dist']
+            },<% } %>
             coffeeTest: {
                 files: ['test/spec/{,*/}*.{coffee,litcoffee,coffee.md}'],
                 tasks: ['coffee:test', 'test:watch']
@@ -48,13 +52,17 @@ module.exports = function (grunt) {
             },<% } %>
             gruntfile: {
                 files: ['Gruntfile.js']
-            },<% if (includeCompass) { %>
+            },<% if (includeCompass) { if (noAppFramework) { %>
             compass: {
-                files: ['<%%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
+                files: ['<%%= yeoman.app %>/stylesheets/{,*/}*.{scss,sass}'],
                 tasks: ['compass:server', 'autoprefixer']
-            },<% } %>
+            },<% } else { %>
+            compass: {
+                files: ['<%%= yeoman.app %>/app/stylesheets/{,*/}*.{scss,sass}'],
+                tasks: ['compass:server', 'autoprefixer']
+            },<% }} %>
             styles: {
-                files: ['<%%= yeoman.app %>/styles/{,*/}*.css'],
+                files: ['<%%= yeoman.app %>/stylesheets/{,*/}*.css'],
                 tasks: ['newer:copy:styles', 'autoprefixer']
             },
             livereload: {
@@ -62,10 +70,13 @@ module.exports = function (grunt) {
                     livereload: '<%%= connect.options.livereload %>'
                 },
                 files: [
-                    '<%%= yeoman.app %>/{,*/}*.html',
-                    '.tmp/styles/{,*/}*.css',<% if (coffee) { %>
+                    '<%%= yeoman.app %>/{,*/}*.html',<% if (noAppFramework) { %>
+                    '.tmp/stylesheets/{,*/}*.css',<% if (coffee) { %>
                     '.tmp/scripts/{,*/}*.js',<% } %>
-                    '<%%= yeoman.app %>/images/{,*/}*.{gif,jpeg,jpg,png,svg,webp}'
+                    '<%%= yeoman.app %>/images/{,*/}*.{gif,jpeg,jpg,png,svg,webp}'<% } else { %>
+                    '.tmp/app/stylesheets/{,*/}*.css',<% if (coffee) { %>
+                    '.tmp/app/**/*.js',<% } %>
+                    '<%%= yeoman.app %>/app/images/{,*/}*.{gif,jpeg,jpg,png,svg,webp}'<% } %>
                 ]
             }
         },
@@ -128,9 +139,10 @@ module.exports = function (grunt) {
                 reporter: require('jshint-stylish')
             },
             all: [
-                'Gruntfile.js',
+                'Gruntfile.js',<% if (noAppFramework) { %>
                 '<%%= yeoman.app %>/scripts/{,*/}*.js',
-                '!<%%= yeoman.app %>/scripts/vendor/*',
+                '!<%%= yeoman.app %>/scripts/vendor/*',<% } else { %>
+                '<%%= yeoman.app %>/app/**/*.js',<% } %>
                 'test/spec/{,*/}*.js'
             ]
         },
@@ -160,9 +172,9 @@ module.exports = function (grunt) {
             dist: {
                 files: [{
                     expand: true,
-                    cwd: '<%%= yeoman.app %>/scripts',
+                    cwd: '<%%= yeoman.app %>/<% if (!noAppFramework) { %>app/<% } %>scripts',
                     src: '{,*/}*.{coffee,litcoffee,coffee.md}',
-                    dest: '.tmp/scripts',
+                    dest: '.tmp/<% if (!noAppFramework) { %>app/<% } else { %>scripts<% } %>',
                     ext: '.js'
                 }]
             },
@@ -181,22 +193,22 @@ module.exports = function (grunt) {
         // Compiles Sass to CSS and generates necessary files if requested
         compass: {
             options: {
-                sassDir: '<%%= yeoman.app %>/styles',
-                cssDir: '.tmp/styles',
-                generatedImagesDir: '.tmp/images/generated',
-                imagesDir: '<%%= yeoman.app %>/images',
-                javascriptsDir: '<%%= yeoman.app %>/scripts',
-                fontsDir: '<%%= yeoman.app %>/styles/fonts',
-                importPath: '<%%= yeoman.app %>/bower_components',
-                httpImagesPath: '/images',
-                httpGeneratedImagesPath: '/images/generated',
-                httpFontsPath: '/styles/fonts',
-                relativeAssets: false,
+                sassDir: '<%%= yeoman.app %>/<% if (!noAppFramework) { %>app/<% } %>stylesheets',
+                cssDir: '.tmp/<% if (!noAppFramework) { %>app/<% } %>stylesheets',
+                generatedImagesDir: '.tmp/<% if (!noAppFramework) { %>app/<% } %>images/generated',
+                imagesDir: '<%%= yeoman.app %>/<% if (!noAppFramework) { %>app/<% } %>images',
+                javascriptsDir: '<%%= yeoman.app %>/<% if (!noAppFramework) { %>app/<% } else { %>scripts<% } %>',
+                fontsDir: '<%%= yeoman.app %>/<% if (!noAppFramework) { %>app/<% } %>stylesheets/fonts',
+                importPath: '<%%= yeoman.app %>/<% if (!noAppFramework) { %>app/<% } %>bower_components',
+                httpImagesPath: '/<% if (!noAppFramework) { %>app/<% } %>images',
+                httpGeneratedImagesPath: '/<% if (!noAppFramework) { %>app/<% } %>images/generated',
+                httpFontsPath: '/<% if (!noAppFramework) { %>app/<% } %>stylesheets/fonts',
+                relativeAssets: true,
                 assetCacheBuster: false
             },
             dist: {
                 options: {
-                    generatedImagesDir: '<%%= yeoman.dist %>/images/generated'
+                    generatedImagesDir: '<%%= yeoman.dist %>/<% if (!noAppFramework) { %>app/<% } %>images/generated'
                 }
             },
             server: {
@@ -214,9 +226,9 @@ module.exports = function (grunt) {
             dist: {
                 files: [{
                     expand: true,
-                    cwd: '.tmp/styles/',
+                    cwd: '.tmp/<% if (!noAppFramework) { %>app/<% } %>stylesheets/',
                     src: '{,*/}*.css',
-                    dest: '.tmp/styles/'
+                    dest: '.tmp/<% if (!noAppFramework) { %>app/<% } %>stylesheets/'
                 }]
             }
         },
@@ -233,11 +245,12 @@ module.exports = function (grunt) {
         rev: {
             dist: {
                 files: {
-                    src: [
-                        '<%%= yeoman.dist %>/scripts/{,*/}*.js',
-                        '<%%= yeoman.dist %>/styles/{,*/}*.css',
-                        '<%%= yeoman.dist %>/images/{,*/}*.{gif,jpeg,jpg,png,webp}',
-                        '<%%= yeoman.dist %>/styles/fonts/{,*/}*.*'
+                    src: [<% if (noAppFramework) { %>
+                        '<%%= yeoman.dist %>/scripts/{,*/}*.js',<% } else { %>
+                        '<%%= yeoman.dist %>/app/{,*/}.*.js',<% } %>
+                        '<%%= yeoman.dist %>/<% if (!noAppFramework) { %>app/<% } %>stylesheets/{,*/}*.css',
+                        '<%%= yeoman.dist %>/<% if (!noAppFramework) { %>app/<% } %>images/{,*/}*.{gif,jpeg,jpg,png,webp}',
+                        '<%%= yeoman.dist %>/<% if (!noAppFramework) { %>app/<% } %>stylesheets/fonts/{,*/}*.*'
                     ]
                 }
             }
@@ -259,7 +272,7 @@ module.exports = function (grunt) {
                 assetsDirs: ['<%%= yeoman.dist %>']
             },
             html: ['<%%= yeoman.dist %>/{,*/}*.html'],
-            css: ['<%%= yeoman.dist %>/styles/{,*/}*.css']
+            css: ['<%%= yeoman.dist %>/<% if (!noAppFramework) { %>app/<% } %>stylesheets/{,*/}*.css']
         },
 
         // The following *-min tasks produce minified files in the dist folder
@@ -267,9 +280,9 @@ module.exports = function (grunt) {
             dist: {
                 files: [{
                     expand: true,
-                    cwd: '<%%= yeoman.app %>/images',
+                    cwd: '<%%= yeoman.app %>/<% if (!noAppFramework) { %>app/<% } %>images',
                     src: '{,*/}*.{gif,jpeg,jpg,png}',
-                    dest: '<%%= yeoman.dist %>/images'
+                    dest: '<%%= yeoman.dist %>/<% if (!noAppFramework) { %>app/<% } %>images'
                 }]
             }
         },
@@ -277,9 +290,9 @@ module.exports = function (grunt) {
             dist: {
                 files: [{
                     expand: true,
-                    cwd: '<%%= yeoman.app %>/images',
+                    cwd: '<%%= yeoman.app %>/<% if (!noAppFramework) { %>app/<% } %>images',
                     src: '{,*/}*.svg',
-                    dest: '<%%= yeoman.dist %>/images'
+                    dest: '<%%= yeoman.dist %>/<% if (!noAppFramework) { %>app/<% } %>images'
                 }]
             }
         },
@@ -310,9 +323,9 @@ module.exports = function (grunt) {
         // cssmin: {
         //     dist: {
         //         files: {
-        //             '<%%= yeoman.dist %>/styles/main.css': [
-        //                 '.tmp/styles/{,*/}*.css',
-        //                 '<%%= yeoman.app %>/styles/{,*/}*.css'
+        //             '<%%= yeoman.dist %>/stylesheets/main.css': [
+        //                 '.tmp/stylesheets/{,*/}*.css',
+        //                 '<%%= yeoman.app %>/stylesheets/{,*/}*.css'
         //             ]
         //         }
         //     }
@@ -340,19 +353,18 @@ module.exports = function (grunt) {
                     dest: '<%%= yeoman.dist %>',
                     src: [
                         '*.{ico,png,txt}',
-                        '.htaccess',
-                        'images/{,*/}*.webp',
+                        '<% if (!noAppFramework) { %>app/<% } %>images/{,*/}*.webp',
                         '{,*/}*.html',
-                        'styles/fonts/{,*/}*.*'<% if (includeBootstrap) { %>,
-                        'bower_components/' + (this.includeCompass ? 'sass-' : '') + 'bootstrap/' + (this.includeCompass ? 'fonts/' : 'dist/fonts/') +'*.*'<% } %>
+                        '<% if (!noAppFramework) { %>app/<% } %>stylesheets/fonts/{,*/}*.*'<% if (includeBootstrap) { %>,
+                        '<% if (!noAppFramework) { %>app/<% } %>bower_components/' + (this.includeCompass ? 'sass-' : '') + 'bootstrap/' + (this.includeCompass ? 'fonts/' : 'dist/fonts/') +'*.*'<% } %>
                     ]
                 }]
             },
             styles: {
                 expand: true,
                 dot: true,
-                cwd: '<%%= yeoman.app %>/styles',
-                dest: '.tmp/styles/',
+                cwd: '<%%= yeoman.app %>/<% if (!noAppFramework) { %>app/<% } %>stylesheets',
+                dest: '.tmp/<% if (!noAppFramework) { %>app/<% } %>stylesheets/',
                 src: '{,*/}*.css'
             }
         },

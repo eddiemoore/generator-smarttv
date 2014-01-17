@@ -1,13 +1,14 @@
 {
   "name": "generator-smarttv",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Scaffold out a Samsung SmartTV app",
   "keywords": [
     "yeoman-generator",
     "samsung",
     "smarttv",
     "smart",
-    "tv"
+    "tv",
+    "television"
   ],
   "homepage": "https://github.com/eddiemoore/generator-smarttv",
   "bugs": "https://github.com/eddiemoore/generator-smarttv/issues",

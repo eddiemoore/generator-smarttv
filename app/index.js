@@ -132,10 +132,10 @@ SmartTVGenerator.prototype.mainStylesheet = function mainStylesheet() {
     var css;
     if (this.noAppFramework) {
         css = 'main.' + (this.includeCompass ? 's' : '') + 'css';
-        this.copy(css, 'app/stylesheets/' + css);
+        this.copy(css, 'src/stylesheets/' + css);
     } else {
         css = 'Main.' + (this.includeCompass ? 's' : '') + 'css';
-        this.template('af/app/stylesheets/' + css, 'app/stylesheets/' + css);
+        this.template('af/app/stylesheets/' + css, 'src/app/stylesheets/' + css);
     }
 };
 
@@ -143,23 +143,36 @@ SmartTVGenerator.prototype.mainJavaScript = function mainJavaScript() {
     var js;
     if (this.noAppFramework) {
         js = 'scripts/main.' + (this.coffee ? 'coffee' : 'js');
-        this.copy(js, 'app/' + js);
+        this.copy(js, 'src/' + js);
     } else {
         js = 'Main.' + (this.coffee ? 'coffee' : 'js');
-        this.copy('af/app/scenes/' + js, 'app/scenes/' + js);
+        this.copy('af/app/scenes/' + js, 'src/app/scenes/' + js);
     }
 };
 
 //Only for use with app framework
 SmartTVGenerator.prototype.initFile = function initFile() {
     if (!this.noAppFramework) {
-        this.copy('af/app/init.js', 'app/init.js');
+        var js = 'init.' + (this.coffee ? 'coffee' : 'js');
+        this.copy('af/app/' + js, 'src/app/' + js);
+    }
+};
+
+SmartTVGenerator.prototype.appJSON = function appJSON() {
+    if (!this.noAppFramework) {
+        this.copy('af/app.json', 'src/app.json');
+    }
+};
+
+SmartTVGenerator.prototype.widgetInfo = function widgetInfo() {
+    if (!this.noAppFramework) {
+        this.copy('af/widget.info', 'src/widget.info');
     }
 };
 
 SmartTVGenerator.prototype.writeHtmls = function() {
     if (!this.noAppFramework) {
-        this.copy('af/app/htmls/Main.html', 'app/htmls/Main.html');
+        this.copy('af/app/htmls/Main.html', 'src/app/htmls/Main.html');
     }
 };
 
@@ -175,8 +188,8 @@ SmartTVGenerator.prototype.writeIndex = function writeIndex() {
 
     // wire Twitter Bootstrap plugins
     if (this.includeBootstrap) {
-        var bs = 'bower_components/' + (this.includeCompass ? 'sass-' : '') + 'bootstrap/js/';
-        this.indexFile = this.appendScripts(this.indexFile, 'scripts/plugins.js', [
+        var bs = (this.noAppFramework ? '' : 'app/') + 'bower_components/' + (this.includeCompass ? 'sass-' : '') + 'bootstrap/js/';
+        this.indexFile = this.appendScripts(this.indexFile, 'app/vendor/plugins.js', [
             bs + 'affix.js',
             bs + 'alert.js',
             bs + 'dropdown.js',
@@ -192,35 +205,42 @@ SmartTVGenerator.prototype.writeIndex = function writeIndex() {
         ]);
     }
 
-    this.indexFile = this.appendFiles({
-        html: this.indexFile,
-        fileType: 'js',
-        optimizedPath: 'scripts/main.js',
-        sourceFileList: ['scripts/main.js'],
-        searchPath: '{app,.tmp}'
-    });
+    if (this.noAppFramework) {
+        this.indexFile = this.appendFiles({
+            html: this.indexFile,
+            fileType: 'js',
+            optimizedPath: 'scripts/main.js',
+            sourceFileList: ['scripts/main.js'],
+            searchPath: '{app,.tmp}'
+        });
+    }
 };
 
 SmartTVGenerator.prototype.writeConfigXML = function jshint() {
-    this.copy('config.xml', 'app/config.xml');
+    this.copy('config.xml', 'src/config.xml');
 };
 
 SmartTVGenerator.prototype.app = function app() {
-    this.mkdir('app');
+    this.mkdir('src');
+
     if (this.noAppFramework) {
-        this.mkdir('app/scripts');
+        this.mkdir('src/scripts');
+        this.mkdir('src/stylesheets');
+        this.mkdir('src/images');
     } else {
-        this.mkdir('app/scenes');
-        this.mkdir('app/htmls');
+        this.mkdir('src/app');
+        this.mkdir('src/app/scenes');
+        this.mkdir('src/app/htmls');
+        this.mkdir('src/app/stylesheets');
+        this.mkdir('src/app/images');
     }
-    this.mkdir('app/stylesheets');
-    this.mkdir('app/images');
-    this.write('app/index.html', this.indexFile);
+    this.write('src/index.html', this.indexFile);
 };
 
 SmartTVGenerator.prototype.imageFiles = function () {
     this.sourceRoot(path.join(__dirname, 'templates'));
-    this.directory('images', 'app/images', true);
+    var dir = this.noAppFramework ? 'src/' : 'src/app/'
+    this.directory('images', dir + 'images', true);
 };
 
 SmartTVGenerator.prototype.install = function () {

@@ -27,20 +27,23 @@ describe('smarttv generator', function () {
         this.app = require('../app');
     });
 
-
+    /** ==============================================================================
+        Non App Framework
+        ============================================================================*/
     it('creates expected files in non app framework mode', function (done) {
         var expected = [
           ['bower.json', /"name": "temp"/],
           ['package.json', /"name": "temp"/],
           ['Gruntfile.js', /coffee:/],
-          'app/index.html',
-          'app/config.xml',
-          'app/scripts/main.coffee',
-          'app/stylesheets/main.scss'
+          'src/index.html',
+          'src/config.xml',
+          'src/scripts/main.coffee',
+          'src/stylesheets/main.scss'
         ];
 
         helpers.mockPrompt(this.app, {
-            features: ['includeCompass']
+            features: ['includeCompass'],
+            apptype: 'Video'
         });
 
         this.app.coffee = true;
@@ -57,14 +60,15 @@ describe('smarttv generator', function () {
           ['bower.json', /"name": "temp"/],
           ['package.json', /"name": "temp"/],
           'Gruntfile.js',
-          'app/index.html',
-          'app/config.xml',
-          'app/scripts/main.js',
-          'app/stylesheets/main.scss'
+          'src/index.html',
+          'src/config.xml',
+          'src/scripts/main.js',
+          'src/stylesheets/main.scss'
         ];
 
         helpers.mockPrompt(this.app, {
-          features: ['includeCompass']
+          features: ['includeCompass'],
+            apptype: 'Video'
         });
 
         this.app.coffee = false;
@@ -81,18 +85,107 @@ describe('smarttv generator', function () {
           ['bower.json', /"name": "temp"/],
           ['package.json', /"name": "temp"/],
           'Gruntfile.js',
-          'app/index.html',
-          'app/config.xml',
-          'app/scripts/main.js',
-          'app/stylesheets/main.scss'
+          'src/index.html',
+          'src/config.xml',
+          'src/scripts/main.js',
+          'src/stylesheets/main.scss'
         ];
 
         helpers.mockPrompt(this.app, {
-          features: ['includeCompass']
+          features: ['includeCompass'],
+            apptype: 'Video'
+        });
+
+        this.app.noAppFramework = true;
+        this.app.options['skip-install'] = true;
+        this.app.run({}, function () {
+          helpers.assertFiles(expected);
+          done();
+        });
+    });
+
+
+    /** ==============================================================================
+        App Framework
+        ============================================================================*/
+
+    it('creates expected files in app framework mode', function (done) {
+        var expected = [
+          ['bower.json', /"name": "temp"/],
+          ['package.json', /"name": "temp"/],
+          ['Gruntfile.js', /coffee:/],
+          'src/index.html',
+          'src/config.xml',
+          'src/app.json',
+          'src/widget.info',
+          'src/app/init.coffee',
+          'src/app/scenes/Main.coffee',
+          'src/app/stylesheets/Main.scss',
+          'src/app/htmls/Main.html'
+        ];
+
+        helpers.mockPrompt(this.app, {
+            features: ['includeCompass'],
+            apptype: 'Video'
+        });
+
+        this.app.coffee = true;
+        this.app.options['skip-install'] = true;
+        this.app.run({}, function () {
+            helpers.assertFiles(expected);
+            done();
+        });
+    });
+
+    it('creates expected files in non-AMD non-coffee mode in app framework mode', function (done) {
+        var expected = [
+          ['bower.json', /"name": "temp"/],
+          ['package.json', /"name": "temp"/],
+          'Gruntfile.js',
+          'src/index.html',
+          'src/config.xml',
+          'src/app.json',
+          'src/widget.info',
+          'src/app/init.js',
+          'src/app/scenes/Main.js',
+          'src/app/stylesheets/Main.scss',
+          'src/app/htmls/Main.html'
+        ];
+
+        helpers.mockPrompt(this.app, {
+          features: ['includeCompass'],
+            apptype: 'Video'
+        });
+
+        this.app.coffee = false;
+        this.app.options['skip-install'] = true;
+        this.app.run({}, function () {
+          helpers.assertFiles(expected);
+          done();
+        });
+    });
+
+    it('creates expected files in AMD mode in app framework mode', function (done) {
+        var expected= [
+          ['bower.json', /"name": "temp"/],
+          ['package.json', /"name": "temp"/],
+          'Gruntfile.js',
+          'src/index.html',
+          'src/config.xml',
+          'src/app.json',
+          'src/widget.info',
+          'src/app/init.js',
+          'src/app/scenes/Main.js',
+          'src/app/stylesheets/Main.scss',
+          'src/app/htmls/Main.html'
+        ];
+
+        helpers.mockPrompt(this.app, {
+          features: ['includeCompass'],
+            apptype: 'Video'
         });
 
         this.app.options['skip-install'] = true;
-        this.app.noAppFramework = true;
         this.app.run({}, function () {
           helpers.assertFiles(expected);
           done();
