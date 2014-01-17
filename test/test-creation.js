@@ -28,7 +28,7 @@ describe('smarttv generator', function () {
     });
 
 
-    it('creates expected files', function (done) {
+    it('creates expected files in non app framework mode', function (done) {
         var expected = [
           ['bower.json', /"name": "temp"/],
           ['package.json', /"name": "temp"/],
@@ -36,14 +36,15 @@ describe('smarttv generator', function () {
           'app/index.html',
           'app/config.xml',
           'app/scripts/main.coffee',
-          'app/styles/main.scss'
+          'app/stylesheets/main.scss'
         ];
 
         helpers.mockPrompt(this.app, {
             features: ['includeCompass']
         });
-        
+
         this.app.coffee = true;
+        this.app.noAppFramework = true;
         this.app.options['skip-install'] = true;
         this.app.run({}, function () {
             helpers.assertFiles(expected);
@@ -51,7 +52,7 @@ describe('smarttv generator', function () {
         });
     });
 
-    it('creates expected files in non-AMD non-coffee mode', function (done) {
+    it('creates expected files in non-AMD non-coffee mode and non app framework mode', function (done) {
         var expected = [
           ['bower.json', /"name": "temp"/],
           ['package.json', /"name": "temp"/],
@@ -59,7 +60,7 @@ describe('smarttv generator', function () {
           'app/index.html',
           'app/config.xml',
           'app/scripts/main.js',
-          'app/styles/main.scss'
+          'app/stylesheets/main.scss'
         ];
 
         helpers.mockPrompt(this.app, {
@@ -67,6 +68,7 @@ describe('smarttv generator', function () {
         });
 
         this.app.coffee = false;
+        this.app.noAppFramework = true;
         this.app.options['skip-install'] = true;
         this.app.run({}, function () {
           helpers.assertFiles(expected);
@@ -74,7 +76,7 @@ describe('smarttv generator', function () {
         });
     });
 
-      it('creates expected files in AMD mode', function (done) {
+    it('creates expected files in AMD mode and non app framework mode', function (done) {
         var expected= [
           ['bower.json', /"name": "temp"/],
           ['package.json', /"name": "temp"/],
@@ -82,7 +84,7 @@ describe('smarttv generator', function () {
           'app/index.html',
           'app/config.xml',
           'app/scripts/main.js',
-          'app/styles/main.scss'
+          'app/stylesheets/main.scss'
         ];
 
         helpers.mockPrompt(this.app, {
@@ -90,9 +92,10 @@ describe('smarttv generator', function () {
         });
 
         this.app.options['skip-install'] = true;
+        this.app.noAppFramework = true;
         this.app.run({}, function () {
           helpers.assertFiles(expected);
           done();
         });
-      });
+    });
 });

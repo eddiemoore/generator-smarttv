@@ -1,0 +1,6 @@
+{
+    "scenes" : [ "Main"],
+    "files" : [],
+    "theme" : "base",
+    "modules" : [ "ime" ]
+}
