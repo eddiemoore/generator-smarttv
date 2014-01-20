@@ -11,6 +11,7 @@ var SceneGenerator = module.exports = function SceneGenerator(args, options, con
 
   this.sceneName = toTitleCase(this.name);
   this.coffee = options.coffee;
+  this.sass = options.sass;
 };
 
 function toTitleCase(str) {
@@ -24,6 +25,6 @@ SceneGenerator.prototype.files = function files() {
   this.template('scene.' + ext, 'src/app/scenes/' + this.sceneName + '.' + ext);
   this.template('scene.html', 'src/app/htmls/' + this.sceneName + '.html');
 
-  ext = this.includeCompass ? 'scss' : 'css';
+  ext = this.sass ? 'scss' : 'css';
   this.template('scene.' + ext, 'src/app/stylesheets/' + this.sceneName + '.' + ext);
 };

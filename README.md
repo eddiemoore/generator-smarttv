@@ -36,10 +36,24 @@ See the [documentation on Samsung SmartTV apps](http://www.samsungdforum.com/gui
 
   Add support for [CoffeeScript](http://coffeescript.org/).
 
+
+# Scene Subgenerator
+
+* `yo smarttv:scene <scene_name>`
+
+## Options for subgenerator
+
+* `--coffee`
+
+  Add support for [CoffeeScript](http://coffeescript.org/).
+
+* `--sass`
+
+  Creates stylesheet in SCSS format.
+
+
 ## Todo
 - Create icons
-- Include more js files for Samsung SmartTV
-- Include sample code for basic app
 - Get `grunt serve` to load app in VirtualBox
 
 ## License
