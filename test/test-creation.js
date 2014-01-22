@@ -191,4 +191,56 @@ describe('smarttv generator', function () {
           done();
         });
     });
+
+    /**
+        Scene generator
+    */
+
+    it('should generate a new scene', function(done) {
+        var name = 'foo';
+        var deps = [path.join('../../', 'scene')];
+        var smarttvGenerator = helpers.createGenerator('smarttv:scene', deps, [name]);
+
+        helpers.mockPrompt(this.app, {
+            features: ['includeCompass'],
+            apptype: 'Video'
+        });
+
+        this.app.options['skip-install'] = true;
+        this.app.run({}, function() {
+            smarttvGenerator.run({}, function() {
+                helpers.assertFiles([
+                    [path.join('src/app/scenes', 'Foo' + '.js')],
+                    [path.join('src/app/htmls', 'Foo' + '.html')],
+                    [path.join('src/app/stylesheets', 'Foo' + '.css')],
+                ]);
+                done();
+            });
+        });
+    });
+
+    it('should generate a new scene with coffee and sass', function(done) {
+        var name = 'foo';
+        var deps = [path.join('../../', 'scene')];
+        var smarttvGenerator = helpers.createGenerator('smarttv:scene', deps, [name]);
+
+        helpers.mockPrompt(this.app, {
+            features: ['includeCompass'],
+            apptype: 'Video'
+        });
+
+        this.app.options['skip-install'] = true;
+        this.app.run({}, function() {
+            smarttvGenerator.coffee = true;
+            smarttvGenerator.sass = true;
+            smarttvGenerator.run({}, function() {
+                helpers.assertFiles([
+                    [path.join('src/app/scenes', 'Foo' + '.coffee')],
+                    [path.join('src/app/htmls', 'Foo' + '.html')],
+                    [path.join('src/app/stylesheets', 'Foo' + '.scss')],
+                ]);
+                done();
+            });
+        });
+    });
 });
