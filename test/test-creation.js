@@ -210,9 +210,9 @@ describe('smarttv generator', function () {
         this.app.run({}, function() {
             smarttvGenerator.run({}, function() {
                 helpers.assertFiles([
-                    [path.join('src/app/scenes', 'Foo' + '.js')],
-                    [path.join('src/app/htmls', 'Foo' + '.html')],
-                    [path.join('src/app/stylesheets', 'Foo' + '.css')],
+                    'src/app/scenes/Foo.js',
+                    'src/app/htmls/Foo.html',
+                    'src/app/stylesheets/Foo.css',
                 ]);
                 done();
             });
@@ -235,9 +235,9 @@ describe('smarttv generator', function () {
             smarttvGenerator.sass = true;
             smarttvGenerator.run({}, function() {
                 helpers.assertFiles([
-                    [path.join('src/app/scenes', 'Foo' + '.coffee')],
-                    [path.join('src/app/htmls', 'Foo' + '.html')],
-                    [path.join('src/app/stylesheets', 'Foo' + '.scss')],
+                    'src/app/scenes/Foo.coffee',
+                    'src/app/htmls/Foo.html',
+                    'src/app/stylesheets/Foo.scss',
                 ]);
                 done();
             });
