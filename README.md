@@ -2,6 +2,8 @@
 
 A generator for [Yeoman](http://yeoman.io) to scaffold a Samsung SmartTV application.
 
+**NOTE: I haven't had the chance to update this in a while because of my work**
+
 ## Features
 
 * CSS Autoprefixing
