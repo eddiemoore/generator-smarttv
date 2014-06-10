@@ -2,7 +2,8 @@
 
 A generator for [Yeoman](http://yeoman.io) to scaffold a Samsung SmartTV application.
 
-**NOTE: I haven't had the chance to update this in a while because of my work**
+##NOTE: Hasn't been updated in a long time because of other work.
+If someone would like to take over the main development of this that would be great.
 
 ## Features
 
