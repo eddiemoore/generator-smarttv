@@ -24,10 +24,13 @@
   },
   "scripts": {
     "test": "mocha --reporter spec && jshint",
-    "coveralls": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
+    "coveralls": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "dependencies": {
-    "yeoman-generator": "~0.18.0"
+    "yeoman-generator": "~0.18.0",
+    "snyk": "^1.317.0"
   },
   "devDependencies": {
     "mocha": "*",
@@ -51,5 +54,6 @@
     {
       "type": "MIT"
     }
-  ]
+  ],
+  "snyk": true
 }
