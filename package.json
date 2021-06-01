@@ -27,7 +27,7 @@
     "coveralls": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
   },
   "dependencies": {
-    "yeoman-generator": "~1.0.0"
+    "yeoman-generator": "~1.1.1"
   },
   "devDependencies": {
     "mocha": "*",
